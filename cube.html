@@ -6,7 +6,7 @@
 	<style>
 
 		html{overflow: hidden;}
-		#div1 {position: relative;top: 100px;left: 200px;width: 200px; height:200px;line-height:20px;position: relative; transition:3s all ease;transform:perspective(800px) rotateX(35deg) rotateY(35deg) scale(0.8,0.8);transform-style:preserve-3d; }
+		#div1 {position: relative;top: 100px;left: 200px;width: 200px; height:200px;line-height:20px;position: relative; transition:3s all ease;transform:perspective(800px) rotateX(35deg) rotateY(35deg) scale(0.8,0.8);transform-style:preserve-3d; -webkit-transform-origin:center center;}
 		#div1 div{position: absolute;left: 0;top: 0;width: 198px;height: 198px;border: 1px solid #ccc; padding:120px;line-height: 30px;font-size: 16px;}
 		#div1 .front{transform:translateZ(100px) ;z-index:3;}
 		#div1 .back{transform:translateZ(-100px) ;z-index:3;}
@@ -16,13 +16,40 @@
 		#div1 .top{transform:rotateX(-90deg)  translateZ(100px) ;z-index:3;}
 
 
-		#div1:active {transform:perspective(500px) rotateX(360deg) rotateY(360deg) scale(1.1,1.1);}
+		/*#div1:active {transform:perspective(500px) rotateX(360deg) rotateY(360deg) scale(1.1,1.1);}*/
 
 
 		#div2 {position: absolute; width: 200px;height: 200px;top: 30%;right: 20%;}
 		#div2 h3{text-align: center;line-height: 40px;color:rgba(0,0,0,1);font-size: 30px;}
 		
 	</style>
+	<script>
+
+	window.onload=function(){
+		var oBox = document.getElementById("div1");
+
+		var y =0;
+		var x =0;
+
+		document.onmousedown = function(ev){
+			var disX = ev.clientX - y;
+			var disY = ev.clientY - x;
+
+			document.onmousemove = function(ev){
+				y = ev.clientX - disX;
+				x = ev.clientY - disY;
+
+				oBox.style.transform = "perspective(800px) rotateX("+(-x)/10+"deg) rotateY("+y/5+"deg)";
+			};
+
+			document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup   = null;
+			};
+			return false;
+		}
+	}
+	</script>
 
 </head>
 <body>
