@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cube</title>
+	<style>
+
+		html{overflow: hidden;}
+		#div1 {position: relative;top: 100px;left: 200px;width: 200px; height:200px;line-height:20px;position: relative; transition:3s all ease;transform:perspective(800px) rotateX(35deg) rotateY(35deg) scale(0.8,0.8);transform-style:preserve-3d; -webkit-transform-origin:center center;}
+		#div1 div{position: absolute;left: 0;top: 0;width: 198px;height: 198px;border: 1px solid #ccc; padding:120px;line-height: 30px;font-size: 16px;}
+		#div1 .front{transform:translateZ(100px) ;z-index:3;}
+		#div1 .back{transform:translateZ(-100px) ;z-index:3;}
+		#div1 .left{transform:rotateY(-90deg)  translateZ(100px) ;z-index:3;}
+		#div1 .right{transform:rotateY(90deg) translateZ(100px) ;z-index:3;}
+		#div1 .bottom{transform:rotateX(90deg) translateZ(100px) ;z-index:3;}
+		#div1 .top{transform:rotateX(-90deg)  translateZ(100px) ;z-index:3;}
+
+
+		/*#div1:active {transform:perspective(500px) rotateX(360deg) rotateY(360deg) scale(1.1,1.1);}*/
+
+
+		#div2 {position: absolute; width: 200px;height: 200px;top: 30%;right: 20%;}
+		#div2 h3{text-align: center;line-height: 40px;color:rgba(0,0,0,1);font-size: 30px;}
+		
+	</style>
+	<script>
+
+	window.onload=function(){
+		var oBox = document.getElementById("div1");
+
+		var bTop = bBottom = bLeft = bRight = false;
+
+		var x =y =0;
+
+		setInterval(function(){
+			if(bLeft){
+				y-=5;
+			}
+			if(bTop){
+				x+=5;
+			}
+			if(bRight){
+				y+=5;
+			}
+			if(bBottom){
+				
+			}
+
+			oBox.style.transform ="perspective(800px) rotateY"
+		},30)
+
+		document.onkeydown = function(ev){
+			switch(ev.keyCode){
+				case 37:
+					bLeft = true;
+					break;
+				case 38:
+					bTop = true;
+					break;
+				case 39:
+					bRight = true;
+					break;
+				case 40:
+					bBottom = true;
+					break;
+
+
+			}
+			
+		}
+		document.onkeydown = function(ev){
+			switch(ev.keyCode){
+				case 37:
+					bLeft = false;
+					break;
+				case 38:
+					bTop = false;
+					break;
+				case 39:
+					bRight = false;
+					break;
+				case 40:
+					bBottom = false;
+					break;
+
+
+			}
+		}
+
+
+	}
+	</script>
+
+</head>
+<body>
+
+	<div id="div1">
+		<div class="front">这事在我们看来实在荒诞不经，大概就跟虾眼睛里直着走路的人一样</div>
+		<div class="back">在空气里淹死的鱼 </div>
+		<div class="left">姑娘长得不难看，只需要给她另外定做一个框架</div>
+		<div class="right">问：何事易，何事难<br />答：提这样的问题易，回答它们难</div>
+		<div class="bottom">人们送给他一份热乎乎的，有点焦糊味的感激</div>
+		<div class="top">他偏爱字典上一般找不到的词</div>
+	</div>
+
+	<div id="div2">
+		<h3>DEMO</h3>
+		<p>选段自 《格言集》<br /><br/>格奥尔格·克里斯托夫·利希滕贝格著</p>
+	</div>
+	
+</body>
+</html>

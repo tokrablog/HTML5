@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>163</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.clock{width: 187px;height: 181px;position: absolute;right: 300px;top:200px;}
+		.clock .happen-time-wrapper{position: absolute;width: 100%;height: 100%;left: 50%;top:50%;margin-left: -90.5px;margin-top: -90.5px;background: url(img/header-bg-time-wrapper.png)no-repeat 0 0;
+			
+			
+		}
+		.clock .happen-time-inner {position: absolute;width: 139px;height: 145px;left: 50%;top: 50%;margin-left: -68.5px;margin-top: -74.5px;background: url(img/header-bg-time-inner.png)no-repeat 0 0;color: #888;
+			/*transform:rotate(0deg); transition:600s all linear;*/
+		}
+		.clock .happen-time {padding-top: 50px;}
+		.clock p{text-align: center;font-size: 12px;}
+		.clock .happen-time span {color: #252525;font-size: 16px;font-weight: bold;line-height: 16px;}
+		.clock .second {color: #888;line-height: 32px;height: 32px;margin: 5px 0;padding-left: 12px}
+
+
+		/*.clock:active .happen-time-wrapper {transform:rotate(3600deg);} */
+		/*.clock:active .happen-time-inner {transform:rotate(3600deg);}*/
+
+	</style>
+	<script>
+
+	window.onload=function(){
+		var oClock = document.querySelector(".clock");
+		var oWrapper = document.querySelector(".happen-time-wrapper");
+		var oInner = document.querySelector(".happen-time-inner");
+
+		var oDay = document.getElementById("day");
+		var oHour = document.getElementById("hour");
+		var oMinute = document.getElementById("minute");
+		var oSecond = document.getElementById("second");
+		
+		
+
+		var oldDay = new Date();
+		oldDay.setFullYear(2015,8,7);
+		oldDay.setHours(9,30,0,0);
+
+		var startDeg = 0;
+
+		// alert(oldDay);
+
+		tick();
+		function tick(){
+			var now = new Date();
+			var s = parseInt((now.getTime()-oldDay.getTime())/1000);
+
+			// var d = new Date();
+			// var nowDay = d.getDate();
+			// var nowHour = d.getHours();
+			// var nowMinute = d.getMinutes();
+
+			var date = parseInt(s/86400);
+			// alert(oDay+": "+oHour+": "+oMinute);
+			s %= 86400;
+
+			var hours = parseInt(s/3600);
+
+			s%= 3600;
+
+			var minutes = parseInt(s/60);
+
+			s%=60;
+
+
+
+			oDay.innerHTML =date;
+			oHour.innerHTML =hours;
+			oMinute.innerHTML=minutes;
+			oSecond.innerHTML=s;
+
+		}	
+		oWrapper.style.transition="none";
+		setInterval(function(){
+			tick();
+
+			// startDeg+=6;
+			
+			// oInner.style.transform="rotate("+startDeg+"deg)";
+		},1000);
+
+		setInterval(function(){
+			startDeg+=1;
+			oWrapper.style.transform="rotate("+startDeg+"deg)";
+			oWrapper.style.transition="1s all linear";
+		},1000/6)
+
+	}
+	</script>
+</head>
+<body>
+	<div class="clock">
+		<div class="happen-time-wrapper"></div>
+		<div class="happen-time-inner"></div>
+		<p class="happen-time">
+			<span id="day"></span>
+			天
+			<span id="hour"></span>
+			时
+			<span id="minute"></span>
+			分
+		</p>
+		<p class="second">
+			<span id="second"></span>
+			秒
+		</p>
+		<p>
+			距离发生的时间
+			<span></span>
+		</p>
+	</div>
+</body>
+</html>
